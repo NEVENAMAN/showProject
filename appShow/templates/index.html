@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show index</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/master.css' %}">
+    <link rel="stylesheet" href="{% static 'https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/docs_min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap_min.css' %}">
+    <style>
+        .container{
+            width:1000;
+            margin:100px auto;
+        }
+        .container form{
+            margin-top:50px;
+            margin-left:-130px;
+        }
+        .actions{
+            display: flex;
+            justify-content: space-between;
+        }
+        .container2{
+            margin-left: 270px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>All shows</h1><br>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Network</th>
+                <th scope="col">Related Data</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for element in show %}
+            <tr>
+                <th scope="row">{{element.id}}</th>
+                <td>{{element.title}}</td>
+                <td>{{element.network}}</td>
+                <td>{{element.relase_date}}</td>
+                <td class="actions">
+                    <form action="/show_page" method="get">
+                        {% csrf_token %}
+                        <input type="hidden" name="show_show_id" value="{{element.id}}">
+                        <input class="btn btn-primary" type="submit" value="Show">
+                    </form>
+                    <form action="/edit_show" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="edit_show_id" value="{{element.id}}">
+                        <input class="btn btn-primary" type="submit" value="Edit">
+                    </form>
+                    <form action="/delete_show" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="delete_show_id" value="{{element.id}}">
+                        <input class="btn btn-primary" type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        <div class="container2">
+        <form action="/add_show_page" method="post">
+            {% csrf_token %}
+            <input type="hidden" >
+            <input type="submit" value="Add new show">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add show</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/master.css' %}">
+    <link rel="stylesheet" href="{% static 'https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/docs_min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap_min.css' %}">
+    <style>
+        .container{
+            width:1000;
+            margin:100px auto;
+        }
+        .container form{
+            margin-top:50px;
+            margin-left:-130px;
+        }
+        .actions{
+            display: flex;
+            justify-content: space-between;
+        }
+        .container h1{
+            margin-left: -130px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add a New Show</h1>
+        <form action="/add_show_process" method="post">
+            {% csrf_token %}
+            <fieldset>
+                <div class="form-group">
+                    <label for="disabledTextInput">Title</label>
+                    <input type="text" name="title"  id="disabledInput" class="form-control" placeholder="title of show">
+                </div>
+                <div class="form-group">
+                    <label for="disabledTextInput">Network</label>
+                    <input type="text" name="network" class="form-control" placeholder="network of show">
+                </div>
+                <div class="form-group">
+                    <label for="disabledSelect">Release Date</label>
+                    <input type="datetime-local" name="relase_date"  class="form-control">
+                </div>
+                <div class="form-group">
+                    Description
+                    <textarea name="desc" rows="5"  class="form-control"></textarea>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

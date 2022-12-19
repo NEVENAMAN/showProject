@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>show Shows</title>
+    {% load static %}
+    <style>
+    .container{
+    width:1000;
+    margin:100px auto;
+    }
+    .container table{
+        padding:50px 300px;
+    }
+    .actions_show{
+        padding-left: 300px;
+    }
+    .form_action{
+        display: flex;
+        margin-top: 20px;
+        width:120px;
+        justify-content: space-between;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table>
+            <tr>
+                <td> <h1>TV Show {{show.id}}</h1></td>
+            </tr>
+            <tr>
+                <td>Title : </td>
+                <td>{{show.title}}</td>
+            </tr>
+            <tr>
+                <td>Network : </td>
+                <td>{{show.network}}</td>
+            </tr>
+            <tr>
+                <td>Relased Date : </td>
+                <td>{{show.relase_date}}</td>
+            </tr>
+            <tr>
+                <td>Description : </td>
+                <td>{{show.desc}}</td>
+            </tr>
+        </table>
+        
+        <div class="actions_show">
+            Last updated : {{show.updated_at}}
+            <div class="form_action">
+            <form action="/edit_show" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="edit_show_id" value="{{show.id}}"> 
+                <input type="submit" value="Edit">
+            </form>
+            <form action="/delete_show" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="delete_show_id" value="{{show.id}}">
+                <input type="submit" value="Delete">
+            </form>
+        </div>
+        </div>
+       
+        
+        
+    </div>
+</body>
+</html>
