@@ -30,27 +30,34 @@
 </head>
 <body>
     <div class="container">
-        <h1>Update Show {{show.id}}</h1>
+        <h1>Update Show {{show_id}}</h1>
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+        {% endif %}
         <form action="/update_show" method="post">
             {% csrf_token %}
             <fieldset>
                 <div class="form-group">
                     <label for="disabledTextInput">Title</label>
-                    <input type="text" name="title_edit"  id="disabledInput" class="form-control" value="{{title}}">
+                    <input type="text" name="title"  id="disabledInput" class="form-control" value="{{title}}">
                 </div>
                 <div class="form-group">
                     <label for="disabledTextInput">Network</label>
-                    <input type="text" name="network_edit" class="form-control" value="{{network}}">
+                    <input type="text" name="network" class="form-control" value="{{network}}">
                 </div>
                 <div class="form-group">
                     <label for="disabledSelect">Release Date</label>
-                    <input type="datetime-local" name="relase_date_edit"  class="form-control" value="{{relase_date|date:'Y-m-d H:i'}}" placeholder="{{relase_date|date:'Y-m-d H:i'}}">
+                    <input type="date" name="relase_date"  class="form-control" value="{{relase_date|date:'Y-m-d'}}" placeholder="{{relase_date|date:'Y-m-d H:i'}}">
                 </div>
                 <div class="form-group">
                     Description
-                    <textarea name="desc_edit" rows="5"  class="form-control" value="{{desc}}" placeholder="{{desc}}"></textarea>
+                    <textarea name="desc" rows="5"  class="form-control" value="{{desc}}" placeholder="{{desc}}"></textarea>
                 </div>
-                <input type="hidden" name="edit_show_id" value="{{show.id}}">
+                <input type="hidden" name='edit_show_id' value="{{show_id}}">
                 <button type="submit" class="btn btn-primary">Update</button>
                 <br>
             </fieldset>

@@ -49,7 +49,7 @@
                 <td>{{element.network}}</td>
                 <td>{{element.relase_date}}</td>
                 <td class="actions">
-                    <form action="/show_page" method="get">
+                    <form action="/show_page" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="show_show_id" value="{{element.id}}">
                         <input class="btn btn-primary" type="submit" value="Show">

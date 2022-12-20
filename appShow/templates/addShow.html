@@ -31,6 +31,13 @@
 <body>
     <div class="container">
         <h1>Add a New Show</h1>
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
         <form action="/add_show_process" method="post">
             {% csrf_token %}
             <fieldset>
@@ -44,7 +51,7 @@
                 </div>
                 <div class="form-group">
                     <label for="disabledSelect">Release Date</label>
-                    <input type="datetime-local" name="relase_date"  class="form-control">
+                    <input type="date" name="relase_date"  class="form-control">
                 </div>
                 <div class="form-group">
                     Description
